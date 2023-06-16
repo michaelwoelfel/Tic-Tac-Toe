@@ -14,6 +14,8 @@ let fields = [
 let gameEnded = false;
 
 function render() {
+  document.querySelector('.player1').style.backgroundColor = 'whitesmoke';
+  
     let contentContainer = document.getElementById("content");
     let table = "<table>";
     for (let i = 0; i < 9; i++) {
@@ -53,18 +55,73 @@ function render() {
   ` : ""}</td>`;
   }
 
+  function getWinningCombination() {
+    const winningCombinations = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertikal
+      [0, 4, 8], [2, 4, 6] // Diagonal
+    ];
+  
+    for (let i = 0; i < winningCombinations.length; i++) {
+      const combination = winningCombinations[i];
+      const [a, b, c] = combination;
+      if (fields[a] !== null && fields[a] === fields[b] && fields[a] === fields[c]) {
+        let type;
+        if (i < 3) type = "horizontal";
+        else if (i < 6) type = "vertical";
+        else type = "diagonal";
+        return { combination, type };
+      }
+    }
+  
+    return { combination: [], type: null };
+  }
+  
+
+  
   function makeMove(index) {
     if (!gameEnded && fields[index] === null) {
       const previousPlayer = currentPlayer;
       fields[index] = currentPlayer;
       const fieldElement = document.querySelector(`.td${index}`);
       fieldElement.innerHTML = insertHTML(index, currentPlayer);
+
+      const player1Div = document.querySelector('.player1');
+      const player2Div = document.querySelector('.player2');
+      
+      if (currentPlayer === "cross") {
+        player1Div.style.backgroundColor = "";
+        player2Div.style.backgroundColor = "whitesmoke";
+      } else if (currentPlayer === "circle") {
+        player1Div.style.backgroundColor = "whitesmoke";
+        player2Div.style.backgroundColor = "";
+      }
+      
       if (checkWin()) {
         gameEnded = true;
+        const { combination, type } = getWinningCombination();
+  
+        // Markiere die gewinnende Spalte oder Zeile
+        if (type === "vertical" || type === "horizontal" || type === "diagonal") {
+          const [a, b, c] = combination;
+          const winningCells = document.querySelectorAll(`.td${a}, .td${b}, .td${c}`);
+          winningCells.forEach((cell) => {
+            cell.classList.add("winning-cell");
+            if (type === "vertical") {
+              cell.classList.add("vertical");
+            } else if (type === "diagonal" && combination.toString() === "0,4,8") {
+              cell.classList.add("diagonal-1");
+            } else if (type === "diagonal" && combination.toString() === "2,4,6") {
+              cell.classList.add("diagonal-2");
+            }
+          });
+        }
+        // Zeige den Gewinner in einem Alert an
         setTimeout(() => {
           alert("Spieler " + previousPlayer + " hat gewonnen!");
           resetBoard();
         }, 1000);
+  
       } else if (checkTie()) {
         gameEnded = true;
         setTimeout(() => {
@@ -72,10 +129,18 @@ function render() {
           resetBoard();
         }, 1000);
       }
-
+  
       currentPlayer = currentPlayer === "cross" ? "circle" : "cross";
     }
   }
+  
+  
+  
+  
+  
+  
+  
+  
   
   
 function checkWin() {
@@ -116,8 +181,19 @@ function checkWin() {
       null,
     ];
     gameEnded = false;
+    const winningFieldStart = document.querySelector('.winning-field-start');
+    const winningFieldEnd = document.querySelector('.winning-field-end');
+    if (winningFieldStart) {
+      winningFieldStart.classList.remove('winning-field-start');
+    }
+    if (winningFieldEnd) {
+      winningFieldEnd.classList.remove('winning-field-end');
+    }
     render();
   }
+  
+  
+  
   
 
 
