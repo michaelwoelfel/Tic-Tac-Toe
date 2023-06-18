@@ -5,38 +5,47 @@ body {
   flex-direction: column;
   margin: 0;
   font-family: 'Roboto', sans-serif;
+  height: 100vh;
+  background-image: url("img/stars.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+ 
 }
 
 .maincontainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 25px;
 }
 
 #content {
   text-align: center;
+  border: 5px solid  #32F4FC;
+  border-radius: 5px;
+  border-collapse: collapse;
 }
 
-table {
-  border-collapse: collapse;
-  margin: 0 auto;
+tbody {
+  background-color: #072A40;
 }
+
+
 
 td {
   position: relative;
-  /* Diese Eigenschaft hinzugefügt */
   width: 150px;
   height: 150px;
-  border: 1px solid black;
+  border: 1px solid #32F4FC; /* Ändern Sie die Border-Farbe auf #32F4FC */
   font-size: 48px;
   cursor: pointer;
-  height: 150px;
+  border-collapse: collapse;
 }
 
 td {
   position: relative;
   text-align: center;
+  border: 5px solid #32F4FC;
 }
 
 td svg {
@@ -49,50 +58,28 @@ td svg {
 
 
 
+
 .tr6 {
-  border-bottom: 10px solid rgba(255, 255, 255, 0.2);
-  border-left: 10px solid rgba(255, 255, 255, 0.2);
-  border-right: 10px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 10px solid #32F4FC;
+  border-left: 10px solid #32F4FC;
+  border-right: 10px solid#32F4FC;
 }
 
 .tr3 {
 
-  border-left: 10px solid rgba(255, 255, 255, 0.2);
-  border-right: 10px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 5px solid black;
+  border-left: 10px solid #32F4FC;
+  border-right: 10px solid #32F4FC;
+  border-bottom: 5px solid #32F4FC;
 }
 
 .tr0 {
-  border-top: 10px solid rgba(255, 255, 255, 0.2);
-  border-left: 10px solid rgba(255, 255, 255, 0.2);
-  border-right: 10px solid rgba(255, 255, 255, 0.2);
-  border-bottom: 5px solid black;
+  border-top: 10px solid #32F4FC;
+  border-left: 10px solid #32F4FC;
+  border-right: 10px solid #32F4FC;
+  border-bottom: 5px solid #32F4FC;
 }
 
-.td0 {
-  border-right: 5px solid black;
 
-}
-
-.td1 {
-  border-right: 5px solid black;
-}
-
-.td3 {
-  border-right: 5px solid black;
-}
-
-.td4 {
-  border-right: 5px solid black;
-}
-
-.td6 {
-  border-right: 5px solid black;
-}
-
-.td7 {
-  border-right: 5px solid black;
-}
 
 
 .td0:hover,
@@ -121,8 +108,9 @@ td svg {
   left: 0;
   width: 100%;
   height: 10px;
-  background-color: black;
+  background-color: #32F4FC;
   transform: translateY(-50%);
+
 
 }
 
@@ -133,6 +121,9 @@ td svg {
   width: 10px;
   height: 100%;
   transform: translateX(-50%);
+}
+table {
+  border-collapse: collapse;
 }
 
 .winning-cell.diagonal-1::before {
@@ -152,6 +143,10 @@ td svg {
 
 }
 
+h1 {
+  color: white;
+}
+
 
 
 .imgcircle {
@@ -163,5 +158,140 @@ td svg {
 }
 
 .marked {
-  border: 2px solid black;
+  border: 2px solid #32F4FC;
+}
+#win-message {
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background-color: black;
+ color: white;
+ font-size: 40px;
+ width: 100%;
+ height: 100vh;
+ position: absolute;
+ background-image: url("img/stars.jpg");
+ background-repeat: no repeat;
+ background-size: cover;
+} 
+
+.win {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.winplayer {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.winplayertie {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-left: 22px;
+}
+
+.player1 {
+  text-align: center;
+  border-radius: 5px;
+  border: 5px solid whitesmoke;
+}
+
+.player2 {
+  text-align: center;
+  border-radius: 5px;
+  border: 5px solid whitesmoke;
+}
+
+#replay-button {
+  border: none;
+ margin-top: 40px;
+ height: 50px;
+ width: 200px;
+ font-size: 30px;
+ border: 2px solid white;
+ border-radius: 5px;
+ color: #072A40;
+  background-color: #32F4FC;
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 22px;
+  
+}
+
+
+@media only screen and (max-width: 840px) {
+ svg {
+    width: 50px;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+
+  }
+  .player1,.player2 {
+    width: 100px;
+  }
+
+  h1 {
+    font-size: 24px;
+    padding-bottom: 40px;
+  }
+
+  td {
+    height: 100px;
+    width: 100px;
+  }
+
+  .maincontainer {
+    flex-direction: column;
+  }
+
+  svg{
+   
+    
+  }
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .player1 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .player2 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+}
+
+@media only screen and (max-width: 510px) {
+td {
+  height: 70px;
+  width: 70px;
+}
+
+svg {
+  width: 30px;
+
+}
+
+
 }
